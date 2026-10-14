@@ -55,7 +55,7 @@ def open_pull_request(state: RunState, paths: Dict[str, Path], repo: Path, dry_r
             ["git", "-C", str(repo), "push", "-u", "origin", branch],
             ["gh", "pr", "create", "--repo", os.environ.get("GITHUB_REPOSITORY", ""), "--head", branch,
              "--title", f"docs: sync documentation with {state.head.label}", "--body-file", str(paths["report"])]]
-    if not paths["patch"].read_text().strip():
+    if not paths["patch"].read_text(encoding="utf-8").strip():
         return []
     if dry_run or not os.environ.get("GITHUB_TOKEN"):
         return [" ".join(c) for c in cmds]

@@ -1,1 +1,5 @@
-Your write-up goes here -- markdown, slides, a notebook, or another format of your choosing (no more than 2 pages / 3 slides equivalent). If it's hosted elsewhere (e.g. a slides link), put the link in this file instead.
+# docs/
+
+- [WRITEUP.md](WRITEUP.md): the 2-page summary (workflow, guardrails, evaluation, deployment)
+- [architecture.drawio](architecture.drawio): workflow diagram (open in draw.io)
+- Evaluation results: [../eval/results.md](../eval/results.md)

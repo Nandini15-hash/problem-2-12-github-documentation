@@ -2,6 +2,8 @@ import json
 import os
 import stat
 
+import pytest
+
 from src.docsync.reasoner import SYSTEM, Reasoner, _extract_json
 
 
@@ -10,6 +12,7 @@ def test_extract_json_tolerates_fences_and_chatter():
     assert _extract_json("no json here") is None
 
 
+@pytest.mark.skipif(os.name == "nt", reason="fake `claude` shim is a POSIX script")
 def test_live_mode_invokes_claude_without_tools_and_passes_key(tmp_path, monkeypatch):
     fake = tmp_path / "claude"
     log = tmp_path / "argv.json"

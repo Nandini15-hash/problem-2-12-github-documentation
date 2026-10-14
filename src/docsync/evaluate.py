@@ -66,7 +66,7 @@ def _dedupe_lines(fs: List[Dict]) -> List[Dict]:
 
 
 def replay(llm: str, out_root: Path) -> Dict:
-    gt_all = json.loads((ROOT / "eval" / "ground_truth.json").read_text())
+    gt_all = json.loads((ROOT / "eval" / "ground_truth.json").read_text(encoding="utf-8"))
     results = {}
     for sc in gt_all["scenarios"]:
         t0 = time.perf_counter()

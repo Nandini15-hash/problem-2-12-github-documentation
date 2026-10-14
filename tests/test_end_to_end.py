@@ -12,8 +12,8 @@ def test_replay_scenario_matches_committed_cassettes(snaps, tmp_path):
     ok = {(f.file, f.line) for f in st.findings if f.verdict == "ok"}
     assert ("docs/compatibility.md", 166) in ok  # talks about `requests`, not httpx
     paths = publish(st, tmp_path)
-    assert "verify=ctx" in paths["patch"].read_text() or "create_default_context" in paths["patch"].read_text()
-    assert json.loads(paths["findings"].read_text())
+    assert "verify=ctx" in paths["patch"].read_text(encoding="utf-8") or "create_default_context" in paths["patch"].read_text(encoding="utf-8")
+    assert json.loads(paths["findings"].read_text(encoding="utf-8"))
     assert exit_code(st) == 1  # CI fails while broken examples remain
 
 

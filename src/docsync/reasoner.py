@@ -134,7 +134,8 @@ class Reasoner:
             env["CLAUDE_CODE_OAUTH_TOKEN"] = env["CLAUDE_KEY"]
         t0 = time.perf_counter()
         try:
-            r = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=self.timeout, env=env)
+            r = subprocess.run(cmd, input=prompt, capture_output=True, text=True,
+                               encoding="utf-8", errors="replace", timeout=self.timeout, env=env)
         except (subprocess.TimeoutExpired, OSError):
             self.stats["errors"] += 1
             return None
