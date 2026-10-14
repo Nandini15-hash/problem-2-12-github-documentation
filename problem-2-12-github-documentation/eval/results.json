@@ -1,0 +1,284 @@
+{
+ "replay": {
+  "replay-0.28.0": {
+   "title": "Code moved 0.27.2 -> 0.28.0, docs left at 0.27.2 (simulated 'forgot the docs' PR)",
+   "static": {
+    "recall": 0.8,
+    "precision": 1.0,
+    "tp_spans": 8,
+    "gt_spans": 10,
+    "false_flags": 0,
+    "false_flags_on_known_traps": 0,
+    "missed": [
+     "docs/compatibility.md:173 (human)",
+     "docs/compatibility.md:201 (exec)"
+    ]
+   },
+   "candidates": {
+    "recall": 1.0,
+    "precision": 0.8333333333333334,
+    "tp_spans": 10,
+    "gt_spans": 10,
+    "false_flags": 2,
+    "false_flags_on_known_traps": 2,
+    "missed": []
+   },
+   "agentic": {
+    "recall": 1.0,
+    "precision": 0.9090909090909091,
+    "tp_spans": 10,
+    "gt_spans": 10,
+    "false_flags": 1,
+    "false_flags_on_known_traps": 1,
+    "missed": []
+   },
+   "fixes": {
+    "applied": 17,
+    "suggested": 2,
+    "blocked_by_guardrails": [],
+    "static_findings_before": 12,
+    "static_findings_after_patch": 0
+   },
+   "llm": {
+    "mode": "replay",
+    "live_calls": 0,
+    "replayed": 9,
+    "missing_cassette": 0,
+    "errors": 0,
+    "cost_usd": 0.0,
+    "latency_s": 0.0
+   },
+   "seconds": 0.64
+  },
+  "audit-0.28.1": {
+   "title": "Released docs vs released code, httpx 0.28.1",
+   "static": {
+    "recall": 0.5,
+    "precision": 1.0,
+    "tp_spans": 2,
+    "gt_spans": 4,
+    "false_flags": 0,
+    "false_flags_on_known_traps": 0,
+    "missed": [
+     "docs/advanced/ssl.md:72 (later_fix)",
+     "docs/compatibility.md:199 (exec)"
+    ]
+   },
+   "candidates": {
+    "recall": 0.75,
+    "precision": 1.0,
+    "tp_spans": 3,
+    "gt_spans": 4,
+    "false_flags": 0,
+    "false_flags_on_known_traps": 0,
+    "missed": [
+     "docs/compatibility.md:199 (exec)"
+    ]
+   },
+   "agentic": {
+    "recall": 0.75,
+    "precision": 1.0,
+    "tp_spans": 3,
+    "gt_spans": 4,
+    "false_flags": 0,
+    "false_flags_on_known_traps": 0,
+    "missed": [
+     "docs/compatibility.md:199 (exec)"
+    ]
+   },
+   "fixes": {
+    "applied": 4,
+    "suggested": 0,
+    "blocked_by_guardrails": [],
+    "static_findings_before": 2,
+    "static_findings_after_patch": 0
+   },
+   "llm": {
+    "mode": "replay",
+    "live_calls": 0,
+    "replayed": 2,
+    "missing_cassette": 0,
+    "errors": 0,
+    "cost_usd": 0.0,
+    "latency_s": 0.0
+   },
+   "seconds": 0.74
+  }
+ },
+ "mutation": {
+  "cases": [
+   {
+    "mutation": "remove_param",
+    "target": "Client(timeout)",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "remove_param",
+    "target": "Client(auth)",
+    "doc_uses": 7,
+    "caught": 7,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "remove_param",
+    "target": "Client.get(params)",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "remove_param",
+    "target": "Timeout(connect)",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "remove_param",
+    "target": "AsyncClient(http2)",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "remove_param",
+    "target": "AsyncClient(transport)",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "remove_param",
+    "target": "HTTPTransport(uds)",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "remove_param",
+    "target": "AsyncHTTPTransport(retries)",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "Client.get(extensions)",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "NetRCAuth(file)",
+    "doc_uses": 2,
+    "caught": 2,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "AsyncClient(http2)",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "HTTPTransport(proxy)",
+    "doc_uses": 18,
+    "caught": 18,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "Client(event_hooks)",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "AsyncClient(base_url)",
+    "doc_uses": 2,
+    "caught": 2,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "AsyncClient.send(stream)",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "deprecate_param",
+    "target": "Cookies.set(domain)",
+    "doc_uses": 2,
+    "caught": 2,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "ProtocolError",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "Auth",
+    "doc_uses": 2,
+    "caught": 2,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "DigestAuth",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "BaseTransport",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "Response",
+    "doc_uses": 4,
+    "caught": 4,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "Proxy",
+    "doc_uses": 3,
+    "caught": 3,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "AsyncHTTPTransport",
+    "doc_uses": 2,
+    "caught": 2,
+    "false_alarms": 0
+   },
+   {
+    "mutation": "rename_symbol",
+    "target": "ResponseNotRead",
+    "doc_uses": 1,
+    "caught": 1,
+    "false_alarms": 0
+   }
+  ],
+  "recall": 1.0,
+  "false_alarms": 0,
+  "mutations": 24,
+  "fully_caught": 24
+ }
+}

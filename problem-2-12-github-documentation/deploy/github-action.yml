@@ -1,0 +1,34 @@
+# Drop into <your-repo>/.github/workflows/docsync.yml
+# Runs on every PR: flags stale docs, comments a report, and (optionally) opens a docs-fix PR.
+name: docsync
+on:
+  pull_request:
+    paths: ["**/*.py", "docs/**", "README.md"]
+permissions:
+  contents: write        # only needed for --open-pr (pushes a docsync/* branch, never the default branch)
+  pull-requests: write   # PR comment
+jobs:
+  docsync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: npm install -g @anthropic-ai/claude-code        # reasoning agent (headless `claude -p`)
+      - run: pip install git+https://github.com/<you>/problem-2-12-github-documentation   # or vendor src/
+      - name: Scan
+        env:
+          CLAUDE_KEY: ${{ secrets.CLAUDE_KEY }}               # optional: without it, static rules only
+        run: |
+          python -m src.docsync.cli scan --repo . \
+            --base ${{ github.event.pull_request.base.sha }} --head ${{ github.event.pull_request.head.sha }} \
+            --package <your_package> --out docsync-out --fail-on error
+      - name: Comment report
+        if: always()
+        env: { GH_TOKEN: ${{ github.token }} }
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file docsync-out/report.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: docsync, path: docsync-out }

@@ -1,0 +1,2 @@
+# DocSync itself is stdlib-only (Python >= 3.9). Tests:
+pytest>=7.0

@@ -1,0 +1,42 @@
+{
+  "_doc": "Hand-adjudicated stale documentation spans for encode/httpx. Sources: 'human' = the httpx maintainers edited these lines in the next release; 'exec' = verified by running the documented call against the released package (TypeError / DeprecationWarning); 'later_fix' = fixed upstream in a later PR. Negatives are lines a naive grep would flag but that are still correct.",
+  "scenarios": [
+    {
+      "name": "replay-0.28.0",
+      "title": "Code moved 0.27.2 -> 0.28.0, docs left at 0.27.2 (simulated 'forgot the docs' PR)",
+      "base": "0.27.2", "head": "0.28.0", "docs": "0.27.2",
+      "stale": [
+        {"file": "docs/advanced/extensions.md", "lines": [169, 169], "source": "exec", "note": "httpx.get(extensions=...) -> TypeError; still live on master"},
+        {"file": "docs/advanced/extensions.md", "lines": [179, 179], "source": "exec", "note": "httpx.request(extensions=...) -> TypeError; still live on master"},
+        {"file": "docs/advanced/ssl.md", "lines": [7, 14], "source": "human", "note": "verify=<str> deprecated"},
+        {"file": "docs/advanced/ssl.md", "lines": [26, 40], "source": "human", "note": "create_ssl_context lost http2; cert / verify=<str> deprecated"},
+        {"file": "docs/advanced/ssl.md", "lines": [60, 86], "source": "human", "note": "Client(cert=...) deprecated"},
+        {"file": "docs/advanced/ssl.md", "lines": [94, 100], "source": "human", "note": "Client(verify=<str>) deprecated"},
+        {"file": "docs/contributing.md", "lines": [214, 218], "source": "human", "note": "verify=<str> deprecated"},
+        {"file": "docs/environment_variables.md", "lines": [11, 40], "source": "human", "note": "SSLKEYLOGFILE no longer read"},
+        {"file": "docs/compatibility.md", "lines": [173, 174], "source": "human", "note": "cert no longer a client-level SSL argument"},
+        {"file": "docs/compatibility.md", "lines": [201, 202], "source": "exec", "note": "says cert is accepted by httpx.get -> TypeError; maintainers missed it, still live on master"}
+      ],
+      "not_stale": [
+        {"file": "docs/compatibility.md", "lines": [166, 166], "note": "describes the requests library"},
+        {"file": "docs/compatibility.md", "lines": [170, 170], "note": "true statement about requests vs httpx"},
+        {"file": "docs/compatibility.md", "lines": [113, 120], "note": "deliberate 'not supported' example"},
+        {"file": "docs/environment_variables.md", "lines": [41, 70], "note": "SSL_CERT_FILE / SSL_CERT_DIR are still read (maintainers deleted these, then restored them in #3579)"}
+      ]
+    },
+    {
+      "name": "audit-0.28.1",
+      "title": "Released docs vs released code, httpx 0.28.1",
+      "base": "0.28.0", "head": "0.28.1", "docs": "0.28.1",
+      "stale": [
+        {"file": "docs/advanced/extensions.md", "lines": [169, 169], "source": "exec", "note": "TypeError, still live on master"},
+        {"file": "docs/advanced/extensions.md", "lines": [179, 179], "source": "exec", "note": "TypeError, still live on master"},
+        {"file": "docs/advanced/ssl.md", "lines": [72, 76], "source": "later_fix", "note": "claims SSL_CERT_FILE is not used; fixed upstream 2025-09-11 (#3579), ~9.5 months after release"},
+        {"file": "docs/compatibility.md", "lines": [199, 201], "source": "exec", "note": "says cert/mounts accepted by httpx.get; not detectable without a diff (prose claim) - expected miss"}
+      ],
+      "not_stale": [
+        {"file": "docs/compatibility.md", "lines": [113, 120], "note": "deliberate 'not supported' example"}
+      ]
+    }
+  ]
+}
